@@ -1,12 +1,21 @@
 const fs = require('node:fs/promises');
 
-async function readData() {
-  const data = await fs.readFile('clothes.json', 'utf8');
-  return JSON.parse(data);
+async function readData(file = 'clothes.json') {
+  const data = await fs.readFile(file, 'utf8');
+
+  try {
+    const parsedData = JSON.parse(data);
+  } catch(error) {
+      console.log(error);
+
+      return {};
+  }
+
+  return parsedData;
 }
 
-async function writeData(data) {
-  await fs.writeFile('clothes.json', JSON.stringify(data));
+async function writeData(data, file = 'clothes.json') {
+  await fs.writeFile(file, JSON.stringify(data));
 }
 
 exports.readData = readData;
