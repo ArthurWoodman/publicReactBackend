@@ -2,9 +2,10 @@ const fs = require('node:fs/promises');
 
 async function readData(file = 'clothes.json') {
   const data = await fs.readFile(file, 'utf8');
+  let parsedData = '';
 
   try {
-    const parsedData = JSON.parse(data);
+    parsedData = JSON.parse(data);
   } catch(error) {
       console.log(error);
 
